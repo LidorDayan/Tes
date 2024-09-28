@@ -1,2 +1,3 @@
-Newlin changes original data of the file
-change from Feature1 branch.
+Newline.txt:
+original data of the file
+change from Feature2 branch
