@@ -22,10 +22,17 @@ pipeline {
                 script {
                     println 'Hello World'
                 }
-                stage('Hello') {
+            }
+        }
+                stage('Run Python Script') {
             steps {
                 script {
-                    println 'Hello World'
+                    // Make sure the Python script exists in the repository
+                    if (fileExists('script.py')) {
+                        sh 'python3 script.py' // Use python or python3 depending on your system
+                    } else {
+                        error 'Python script not found!'
+                    }
                 }
             }
         }
