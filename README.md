@@ -9,7 +9,7 @@ pipeline {
         stage('Verify Clone') {
             steps {
                 script {
-                    if (fileExists('b.py')) {
+                    if (fileExists('Bash')) {
                         println 'Git repository successfully cloned.'
                     } else {
                         error 'Git repository cloning failed.'
