@@ -1,2 +1,12 @@
-# My First GitHub Repository
-# My First GitHub Repository
+pipeline {
+    agent any
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                    println 'Hello World'
+                }
+            }
+        }
+    }
+}
