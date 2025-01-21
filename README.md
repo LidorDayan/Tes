@@ -22,6 +22,11 @@ pipeline {
                 script {
                     println 'Hello World'
                 }
+                stage('Hello') {
+            steps {
+                script {
+                    println 'Hello World'
+                }
             }
         }
     }
