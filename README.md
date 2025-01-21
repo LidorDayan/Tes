@@ -3,8 +3,18 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Replace 'https://github.com/LidorDayan/Tes.git' with the actual repository URL
                 git url: 'https://github.com/LidorDayan/Tes.git', branch: 'main'
+            }
+        }
+        stage('Verify Clone') {
+            steps {
+                script {
+                    if (fileExists('b.py')) {
+                        println 'Git repository successfully cloned.'
+                    } else {
+                        error 'Git repository cloning failed.'
+                    }
+                }
             }
         }
         stage('Hello') {
