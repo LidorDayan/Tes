@@ -15,11 +15,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 script {
-                    if (params.GIT_REPO_URL) {
-                        git url: params.GIT_REPO_URL
-                        echo "Repository cloned from: ${params.GIT_REPO_URL}"
-                    } else {
-                        error 'Git repository URL not provided!'
+                 ls
                     }
                 }
             }
