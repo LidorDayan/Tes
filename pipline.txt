@@ -17,8 +17,8 @@ pipeline {
             steps {
                 script {
                     if (params.GIT_REPO_URL) {
-                        git url: params.GIT_REPO_URL
-                        echo "Repository cloned from: ${params.GIT_REPO_URL}"
+                        git url: params.GIT_REPO_URL, branch: 'main'
+                        echo "Repository cloned from: ${params.GIT_REPO_URL} on branch 'main'"
                     } else {
                         error 'Git repository URL not provided!'
                     }
