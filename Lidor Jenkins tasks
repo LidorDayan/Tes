@@ -1,0 +1,90 @@
+Freestyle project
+Task 1:
+TO run the command echo 'hello world' I needed to 'Add build step' and click on 'Execute shell'.
+
+Taks 2:
+For Checking if the git was cloned I needed to add the command 'ls' and I did that by 'Add build step' and click on 'Execute shell'.
+
+Tasks 3 4 5:
+I needed only 3 stages for this paert because task 5 is also verify that the git was cloned.
+pipeline {
+    agent any
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/LidorDayan/Tes.git', branch: 'main'
+            }
+        }
+        stage('Hello') {
+            steps {
+                script {
+                    echo 'Hello World'
+                }
+            }
+        }
+        stage('Run Python Script and Verify Clone') {
+            steps {
+                script {
+                    // Make sure the Python script exists in the repository
+                    if (fileExists('script.py')) {
+                        sh 'python3 script.py'
+                    } else {
+                        error 'Python script not found!'
+                    }
+                }
+            }
+        }
+    }
+}
+
+Tasks 6 7 8: 
+parameters - this part I defined the input of the user for each task
+For each stage I called te value by typing 'params.(Value name)'
+pipeline {
+    agent any
+    parameters {
+        string(name: 'CUSTOM_MESSAGE', defaultValue: 'Hello, Jenkins!', description: 'Custom message to echo')
+        string(name: 'GIT_REPO_URL', defaultValue: 'https://github.com/your-repo.git', description: 'Git repository URL to clone')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'stage', 'production'], description: 'Select the environment where the pipeline will run')
+        booleanParam(name: 'DEPLOY', defaultValue: true, description: 'This parameter decides whether the pipeline should proceed with deployment')
+    }
+    stages {
+        stage('Echo Custom Message') {
+            steps {
+                script {
+                    echo "User's custom message: ${params.CUSTOM_MESSAGE}"
+                }
+            }
+        }
+        stage('Clone Repository') {
+            steps {
+                script {
+                    if (params.GIT_REPO_URL) {
+                        git url: params.GIT_REPO_URL, branch: 'main'
+                        echo "Repository cloned from: ${params.GIT_REPO_URL} on branch 'main'"
+                    } else {
+                        error 'Git repository URL not provided!'
+                    }
+                }
+            }
+        }
+        stage('Print Environment') {
+            steps {
+                script {
+                    echo "You selected ${params.ENVIRONMENT}"
+                }
+            }
+        }
+        stage('Check Deployment Flag') {
+            steps {
+                script {
+                    if (params.DEPLOY) {
+                        echo "Boolean flag is true, deployment will proceed."
+                    } else {
+                        echo "Boolean flag is false, skipping deployment."
+                    }
+                }
+            }
+        }
+    }
+}
