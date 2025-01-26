@@ -1,21 +1,37 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'CUSTOM_MESSAGE', defaultValue: 'Hello, Jenkins!', description: 'Custom message to echo')
-        string(name: 'GIT_REPO_URL', defaultValue: 'https://github.com/LidorDayan/Tes.git', description: 'Git repository URL to clone')
-    }
     stages {
-        stage('Echo Custom Message') {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/LidorDayan/Tes.git', branch: 'main'
+            }
+        }
+        stage('Verify Clone') {
             steps {
                 script {
-                    echo "User's custom message: ${params.CUSTOM_MESSAGE}"
+                    if (fileExists('Bash')) {
+                        println 'Git repository successfully cloned.'
+                    } else {
+                        error 'Git repository cloning failed.'
+                    }
                 }
             }
         }
-        stage('Clone Repository') {
+        stage('Hello') {
             steps {
                 script {
-                 ls
+                    println 'Hello World'
+                }
+            }
+        }
+                stage('Run Python Script') {
+            steps {
+                script {
+                    // Make sure the Python script exists in the repository
+                    if (fileExists('script.py')) {
+                        sh 'python3 script.py' // Use python or python3 depending on your system
+                    } else {
+                        error 'Python script not found!'
                     }
                 }
             }
