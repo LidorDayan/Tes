@@ -3,6 +3,7 @@ pipeline {
     parameters {
         string(name: 'CUSTOM_MESSAGE', defaultValue: 'Hello, Jenkins!', description: 'Custom message to echo')
         string(name: 'GIT_REPO_URL', defaultValue: 'https://github.com/your-repo.git', description: 'Git repository URL to clone')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'stage', 'production'], description: 'Select the environment where the pipeline will run')
     }
     stages {
         stage('Echo Custom Message') {
@@ -21,6 +22,13 @@ pipeline {
                     } else {
                         error 'Git repository URL not provided!'
                     }
+                }
+            }
+        }
+        stage('Print Environment') {
+            steps {
+                script {
+                    echo "You selected ${params.ENVIRONMENT}"
                 }
             }
         }
