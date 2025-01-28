@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    environment {
+        USER1_CRED = credentials('user1') // First credential
+        USER2_CRED = credentials('user2') // Second credential
+        USER3_CRED = credentials('user3') // Third credential
+    }
+    stages {
+        stage('Process Credentials in Parallel') {
+            parallel {
+                stage('Use Credential: user1') {
+                    steps {
+                        script {
+                            echo "Username for user1: ${USER1_CRED_USR}"
+                        }
+                    }
+                }
+                stage('Use Credential: user2') {
+                    steps {
+                        script {
+                            echo "Username for user2: ${USER2_CRED_USR}"
+                        }
+                    }
+                }
+                stage('Use Credential: user3') {
+                    steps {
+                        script {
+                            echo "Username for user3: ${USER3_CRED_USR}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
