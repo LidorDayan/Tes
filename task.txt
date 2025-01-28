@@ -1,5 +1,5 @@
-https://docs.google.com/document/d/1YVdBrphinEnsCcRXywV9R4MykvoUJmVIWZT4xn32fMg/edit?tab=t.0
-
-| grep nexus
-
-https://www.fosstechnix.com/install-nexus-repository-manager-on-ubuntu-24/
+ sh '''
+                    echo "This is file 1" > file1.txt
+                    echo "This is file 2" > file2.txt
+                    echo "This is file 3" > file3.txt
+                    '''
