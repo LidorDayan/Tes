@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Deploy to Multiple Environments') {
+            parallel {
+                stage('Deploy to Development') {
+                    steps {
+                        echo "Deploying to Development"
+                    }
+                }
+                stage('Deploy to Staging') {
+                    steps {
+                        echo "Deploying to Staging"
+                    }
+                }
+                stage('Deploy to Production') {
+                    steps {
+                        echo "Deploying to Production"
+                    }
+                }
+            }
+        }
+    }
+}
