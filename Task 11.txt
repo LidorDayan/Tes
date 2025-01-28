@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    stages {
+        stage('Parallel Stages') {
+            parallel {
+                stage('Print Date and Time') {
+                    steps {
+                        sh 'date'
+                    }
+                }
+                stage('List Files in Workspace') {
+                    steps {
+                        sh 'ls -la'
+                    }
+                }
+                stage('Print Environment Variables') {
+                    steps {
+                        sh 'env'
+                    }
+                }
+                stage('Display Current Working Directory') {
+                    steps {
+                        sh 'pwd'
+                    }
+                }
+            }
+        }
+    }
+}
