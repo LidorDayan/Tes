@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    stages {
+        stage('Create Files') {
+            steps {
+                script {
+                    // Create the text files in the workspace
+                    sh '''
+                    echo "This is the content of file1.txt" > file1.txt
+                    echo "This is the content of file2.txt" > file2.txt
+                    echo "This is the content of file3.txt" > file3.txt
+                    '''
+                }
+            }
+        }
+        stage('Process Files in Parallel') {
+            parallel {
+                stage('Process file1.txt') {
+                    steps {
+                        script {
+                            // Read and print content of file1.txt
+                            sh 'cat file1.txt'
+                        }
+                    }
+                }
+                stage('Process file2.txt') {
+                    steps {
+                        script {
+                            // Read and print content of file2.txt
+                            sh 'cat file2.txt'
+                        }
+                    }
+                }
+                stage('Process file3.txt') {
+                    steps {
+                        script {
+                            // Read and print content of file3.txt
+                            sh 'cat file3.txt'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
