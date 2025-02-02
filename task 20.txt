@@ -48,3 +48,7 @@ pipeline {
 /var/lib/jenkins/workspace/task 20@tmp/durable-dd314d5e/script.sh.copy: 1: node: not found
 
 script returned exit code 127
+
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
