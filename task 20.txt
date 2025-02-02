@@ -40,3 +40,9 @@ pipeline {
         }
     }
 }
+
++ node app.js
+
+/var/lib/jenkins/workspace/task 20@tmp/durable-dd314d5e/script.sh.copy: 1: node: not found
+
+script returned exit code 127
