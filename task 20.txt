@@ -21,12 +21,11 @@ pipeline {
             }
         }
 
-        stage('Build Application') {
+        stage('Run app.js') {
             steps {
                 script {
-                    echo 'Building the application...'
-                    sh 'npm install'  // Run npm install to install dependencies
-                    sh 'npm run build'  // Run build command
+                    echo 'Executing app.js...'
+                    sh 'node app.js'  // Run the JavaScript file
                 }
             }
         }
