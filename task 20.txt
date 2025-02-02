@@ -1,0 +1,43 @@
+@Library('myLibrary') _  // Load the shared library
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello from Shared Library') {
+            steps {
+                script {
+                    myLibrary.sayHello()  // Call a function from the shared library
+                }
+            }
+        }
+
+        stage('Checkout Repository') {
+            steps {
+                script {
+                    echo 'Checking out the repository...'
+                    git url: 'https://github.com/berezovsky13/nodejs', branch: 'main'
+                }
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                script {
+                    echo 'Building the application...'
+                    sh 'npm install'  // Run npm install to install dependencies
+                    sh 'npm run build'  // Run build command
+                }
+            }
+        }
+
+        stage('Pipeline Finished!') {
+            steps {
+                script {
+                    echo 'Pipeline completed successfully!'
+                    sh 'echo "Pipeline finished!"'  // Prints the final message
+                }
+            }
+        }
+    }
+}
