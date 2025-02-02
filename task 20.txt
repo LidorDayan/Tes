@@ -24,8 +24,10 @@ pipeline {
         stage('Run app.js') {
             steps {
                 script {
+                    echo 'Checking if app.js exists...'
+                    sh 'ls -la'  // Lists all files to confirm `app.js` is present
                     echo 'Executing app.js...'
-                    sh 'node app.js'  // Run the JavaScript file
+                    sh 'node app.js'
                 }
             }
         }
